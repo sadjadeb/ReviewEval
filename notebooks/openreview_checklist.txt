@@ -5,20 +5,19 @@ dataset creation:
     reviewer >> Done
     review_text >> Done
     length_words >> Done
-
-    (what we have: 'tcdate', 'cdate', 'tmdate', 'mdate')
-    review_date_str 
+    review_creation_date >> Done
+    review_last_modification_date >> Done
+    
     days_to_submit
-
     review_suggestion
 ------------------------------------------------
 feature addition:
     title >> DONE
     abstract >> DONE
-
-    MATTR
-    question_count
-    citation_count
+    citation_count >> Done
+    question_count >>>>> Done
+    
+    MATTR    
     sentiment_polarity
     politeness_score
     similarity_score

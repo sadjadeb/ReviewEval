@@ -16,8 +16,8 @@ feature addition:
     abstract >> DONE
     citation_count >> Done
     question_count >>>>> Done
+    MATTR >> Done 
     
-    MATTR    
     sentiment_polarity
     politeness_score
     similarity_score

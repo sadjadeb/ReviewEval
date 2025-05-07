@@ -17,8 +17,8 @@ feature addition:
     citation_count >> Done
     question_count >>>>> Done
     MATTR >> Done 
+    sentiment_polarity >> Done
     
-    sentiment_polarity
     politeness_score
     similarity_score
     num_days_before_deadline

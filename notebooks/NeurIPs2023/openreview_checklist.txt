@@ -1,0 +1,26 @@
+feature set creation timeline based on the code:
+------------------------------------------------
+dataset creation:
+    paper_id
+    reviewer
+    review_text
+    length_words
+    review_creation_date
+    review_last_modification_date
+    review_suggestion
+
+    days_to_submit
+    
+------------------------------------------------
+feature addition:
+    title
+    abstract
+    citation_count
+    question_count
+    MATTR
+    sentiment_polarity
+    similarity_score
+
+    num_days_before_deadline
+    politeness_score
+    

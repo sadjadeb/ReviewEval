@@ -22,6 +22,5 @@ feature addition:
     similarity_score >> Done
 
     num_days_before_deadline >> TBD
-
     politeness_score
     

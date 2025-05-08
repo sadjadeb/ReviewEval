@@ -19,8 +19,9 @@ feature addition:
     question_count >>>>> Done
     MATTR >> Done 
     sentiment_polarity >> Done
-    
+    similarity_score >> Done
+
     num_days_before_deadline >> TBD
 
     politeness_score
-    similarity_score
+    

@@ -1,26 +1,21 @@
 feature set creation timeline based on the code:
 ------------------------------------------------
 dataset creation:
-    paper_id
-    reviewer
-    review_text
-    length_words
-    review_creation_date
-    review_last_modification_date
-    review_suggestion
+    paper_id >> DONE
+    reviewer >> Done
+    review_text >> Done
+    length_words >> Done
+    review_creation_date >> Done
+    review_last_modification_date >> Done
+    title >> DONE
+    abstract >> DONE
+    citation_count >> Done
+    question_count >>>>> Done
+    MATTR >> Done 
+    sentiment_polarity >> Done
+    similarity_score >> Done
+    review_suggestion >> Done: ratings for each aspect of the paper by reviewer like soundness, presentation, ...
 
     days_to_submit
-    
-------------------------------------------------
-feature addition:
-    title
-    abstract
-    citation_count
-    question_count
-    MATTR
-    sentiment_polarity
-    similarity_score
-
     num_days_before_deadline
     politeness_score
-    

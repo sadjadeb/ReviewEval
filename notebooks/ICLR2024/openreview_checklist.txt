@@ -7,12 +7,6 @@ dataset creation:
     length_words >> Done
     review_creation_date >> Done
     review_last_modification_date >> Done
-    review_suggestion >> Done: ratings for each aspect of the paper by reviewer like soundness, presentation, ...
-
-    days_to_submit
-    
-------------------------------------------------
-feature addition:
     title >> DONE
     abstract >> DONE
     citation_count >> Done
@@ -20,7 +14,8 @@ feature addition:
     MATTR >> Done 
     sentiment_polarity >> Done
     similarity_score >> Done
+    review_suggestion >> Done: ratings for each aspect of the paper by reviewer like soundness, presentation, ...
 
-    num_days_before_deadline >> TBD
+    days_to_submit
+    num_days_before_deadline
     politeness_score
-    

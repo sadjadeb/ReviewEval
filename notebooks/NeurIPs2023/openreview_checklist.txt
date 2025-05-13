@@ -15,7 +15,7 @@ dataset creation:
     sentiment_polarity >> Done
     similarity_score >> Done
     review_suggestion >> Done: ratings for each aspect of the paper by reviewer like soundness, presentation, ...
-
-    days_to_submit
+    days_to_submit >> Done
+    
     num_days_before_deadline
     politeness_score

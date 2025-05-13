@@ -4,6 +4,13 @@ import pickle
 from tqdm import tqdm
 from sentence_transformers import SentenceTransformer, util
 import argparse
+from pymongo import MongoClient
+
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27021/")
+db = client.openalex_ds
+authors_col = db.authors_w_works
+works_col = db.works
 
 
 def search_openalex_by_name(name):
@@ -31,133 +38,163 @@ def search_openalex_by_name(name):
         return None
 
 
-def find_openalex_id_of_sw_reviewers(dataset_path, output_path, similarity_model):
+def get_most_similar_openalex_id(submission_embedding, openalex_results, similarity_model):
     """
-    Finds and maps OpenAlex IDs for reviewers in a Semantic Web dataset.
-    
-    Args:
-        dataset_path (str): Path to the JSON file containing the Semantic Web dataset.
-                            The dataset should include submission titles, abstracts, 
-                            and reviews with reviewer names.
-        output_path (str): Path to save the output pickle file containing the mapping
-                           of reviewer names to their OpenAlex IDs.
-        similarity_model: A pre-trained similarity model (e.g., SentenceTransformer)
-                          used to compute embeddings and measure similarity between
-                          submission content and OpenAlex profiles.
-    Returns:
-        None: The function saves the processed data to the specified output file.
-    """
-    # Load the Semantic Web data from JSON file
-    with open(dataset_path, 'r') as f:
-        sw_data = json.load(f)
+    Finds the most similar OpenAlex ID based on the submission embedding.
 
-    # Process the data to find OpenAlex IDs for reviewers
-    sw_reviewers_info = {}
-    for submission in tqdm(sw_data):
-        submission_text = submission['title'] + ' ' + submission['abstract']
+    Args:
+        submission_embedding (Tensor): The embedding of the submission.
+        openalex_results (list): A list of dictionaries containing authors details.
+        similarity_model: A pre-trained similarity model (e.g., SentenceTransformer)
+                          used to compute embeddings and measure similarity.
+
+    Returns:
+        dict: The most similar OpenAlex author information.
+    """
+    best_score = -1
+    best_match = None
+
+    for person in openalex_results:
+        try:
+            topic_text = ' '.join([topic['display_name'] for topic in person['topics']])
+            person_embedding = similarity_model.encode(topic_text, convert_to_tensor=True)
+            similarity = util.cos_sim(submission_embedding, person_embedding).item()
+            if similarity > best_score:
+                best_score = similarity
+                best_match = person
+        except KeyError:
+            continue
+
+    return best_match
+
+
+def find_openalex_id_of_reviewers(dataset, dataset_name, similarity_model):
+    reviewers_info = {}
+    for submission in tqdm(dataset):
+        if dataset_name == 'sw':
+            submission_text = submission['title'] + ' ' + submission['abstract']
+        elif dataset_name == 'f1000':
+            submission = submission[0]
+            submission_text = submission['paper']['title'] + ' ' + submission['paper']['abstract']
         submission_embedding = similarity_model.encode(submission_text, convert_to_tensor=True)
 
         for reviewer in submission['reviews']:
-            reviewer_name = reviewer['reviewer']
+            reviewer_name_field = 'reviewer' if dataset_name == 'sw' else 'name'
+            reviewer_name = reviewer[reviewer_name_field]
             
             # Skip if the reviewer is anonymous or already processed
-            if reviewer_name == 'Anonymous' or reviewer_name in sw_reviewers_info:
+            if reviewer_name == 'Anonymous' or reviewer_name in reviewers_info:
                 continue
-            
-            # Search for the reviewer in OpenAlex
-            openalex_results = search_openalex_by_name(reviewer_name)
-            if openalex_results:
-                if len(openalex_results) == 1:
-                    sw_reviewers_info[reviewer_name] = openalex_results[0]
-                else:
-                    best_score = -1
-                    best_match = None
-
-                    for person in openalex_results:
-                        topic_text = ' '.join([topic['display_name'] for topic in person['topics']])
-                        person_embedding = similarity_model.encode(topic_text, convert_to_tensor=True)
-                        similarity = util.cos_sim(submission_embedding, person_embedding).item()
-                        if similarity > best_score:
-                            best_score = similarity
-                            best_match = person
-
-                    sw_reviewers_info[reviewer_name] = best_match
-            else:
-                print(f"No OpenAlex match found for {reviewer_name}")
-                sw_reviewers_info[reviewer_name] = None
-
-    # Save the processed data to a pickle file
-    with open(output_path, 'wb') as f:
-        pickle.dump(sw_reviewers_info, f)
-
-
-def find_openalex_id_of_f1000_reviewers(dataset_path, output_path, similarity_model):
-    """
-    Finds and maps OpenAlex IDs for reviewers in a F1000 dataset.
-    
-    Args:
-        dataset_path (str): Path to the JSON file containing the Semantic Web dataset.
-                            The dataset should include submission titles, abstracts, 
-                            and reviews with reviewer names.
-        output_path (str): Path to save the output pickle file containing the mapping
-                           of reviewer names to their OpenAlex IDs.
-        similarity_model: A pre-trained similarity model (e.g., SentenceTransformer)
-                          used to compute embeddings and measure similarity between
-                          submission content and OpenAlex profiles.
-    Returns:
-        None: The function saves the processed data to the specified output file.
-    """
-    # Load the F1000 data from JSON file
-    with open(dataset_path, 'r') as f:
-        f1000_data = json.load(f)
-
-    # Process the data to find OpenAlex IDs for reviewers
-    f1000_reviewers_info = {}
-    for submission in tqdm(f1000_data):
-        submission = submission[0]
-        submission_text = submission['paper']['title'] + ' ' + submission['paper']['abstract']
-        submission_embedding = similarity_model.encode(submission_text, convert_to_tensor=True)
-
-        for reviewer in submission['reviews']:
-            reviewer_name = reviewer['name']
             
             # remove the Dr. prefix from the reviewer name
             if reviewer_name.startswith('Dr. '):
                 reviewer_name = reviewer_name[4:]
             
-            # Skip if the reviewer is anonymous or already processed
-            if reviewer_name == 'Anonymous' or reviewer_name in f1000_reviewers_info:
-                continue
-            
             # Search for the reviewer in OpenAlex
             openalex_results = search_openalex_by_name(reviewer_name)
             if openalex_results:
                 if len(openalex_results) == 1:
-                    f1000_reviewers_info[reviewer_name] = openalex_results[0]
+                    reviewers_info[reviewer_name] = openalex_results[0]
                 else:
-                    best_score = -1
-                    best_match = None
-
-                    for person in openalex_results:
-                        try:
-                            topic_text = ' '.join([topic['display_name'] for topic in person['topics']])
-                            person_embedding = similarity_model.encode(topic_text, convert_to_tensor=True)
-                            similarity = util.cos_sim(submission_embedding, person_embedding).item()
-                            if similarity > best_score:
-                                best_score = similarity
-                                best_match = person
-                        except KeyError:
-                            f1000_reviewers_info[reviewer_name] = openalex_results[0]
-
-                    f1000_reviewers_info[reviewer_name] = best_match
+                    best_match = get_most_similar_openalex_id(submission_embedding, openalex_results, similarity_model)
+                    reviewers_info[reviewer_name] = best_match
             else:
                 print(f"No OpenAlex match found for {reviewer_name}")
-                f1000_reviewers_info[reviewer_name] = None
+                reviewers_info[reviewer_name] = None
 
-    # Save the processed data to a pickle file
-    with open(output_path, 'wb') as f:
-        pickle.dump(f1000_reviewers_info, f)
+    return reviewers_info
 
+
+def append_works_to_reviewers(reviewers_info : dict):
+    author_ids = []
+    ids_to_names = {}
+    for reviewer_name, reviewer_info in reviewers_info.items():
+        if reviewer_info is not None:
+            author_ids.append(reviewer_info["id"])
+            ids_to_names[reviewer_info["id"]] = reviewer_name
+    
+    print(f"Number of authors to process: {len(author_ids)}")
+
+    # Fetch all author documents for the given IDs
+    authors = authors_col.find({"_id": {"$in": author_ids}}, {"_id": 1, "known_works": 1})
+
+    for author in tqdm(authors, desc="Processing authors", total=len(author_ids)):
+        author_id = author["_id"]
+        known_works_ids = [work['id'] for work in author["known_works"]]
+        recent_works_ids = [work['id'] for work in author["known_works"] if work['year'] >= 2023]
+        
+        # Fetch all works by ID in a single query
+        works = works_col.find({"_id": {"$in": known_works_ids}}, {"title": 1, "abstract": 1})
+        recent_works = works_col.find({"_id": {"$in": recent_works_ids}}, {"title": 1, "abstract": 1})
+
+        # Extract title and abstract
+        works_list = [{"title": work.get("title", ""), "abstract": work.get("abstract", "")} for work in works]
+        recent_works_list = [{"title": work.get("title", ""), "abstract": work.get("abstract", "")} for work in recent_works]
+
+        reviewers_info[ids_to_names[author_id]]["works"] = works_list
+        reviewers_info[ids_to_names[author_id]]["recent_works"] = recent_works_list
+
+    return reviewers_info
+
+
+def get_similarity_metrics_for_reviewers(dataset, dataset_name, reviewers_info, similarity_model):
+    similarity_info = {}
+    for submission in tqdm(dataset):
+        if dataset_name == 'sw':
+            submission_text = submission['title'] + ' ' + submission['abstract']
+        elif dataset_name == 'f1000':
+            submission = submission[0]
+            submission_text = submission['paper']['title'] + ' ' + submission['paper']['abstract']
+        submission_embedding = similarity_model.encode(submission_text, convert_to_tensor=True)
+        
+        for reviewer in submission['reviews']:
+            reviewer_name_field = 'reviewer' if dataset_name == 'sw' else 'name'
+            reviewer_name = reviewer[reviewer_name_field]
+            # Skip if the reviewer is anonymous or not in the reviewers_info or has no works
+            if (
+                reviewer_name == 'Anonymous' or 
+                reviewer_name not in reviewers_info or 
+                reviewers_info[reviewer_name] is None or 
+                'works' not in reviewers_info[reviewer_name]
+            ):
+                continue
+            
+            # remove the Dr. prefix from the reviewer name
+            if reviewer_name.startswith('Dr. '):
+                reviewer_name = reviewer_name[4:]
+            
+            max_similarity = 0
+            avg_similarity = 0
+            avg_recent_similarity = 0
+            
+            author_works = reviewers_info[reviewer_name]['works']
+            author_works_embeddings = similarity_model.encode(
+                [(work.get('title', '') or '') + ' ' + (work.get('abstract', '') or '') for work in author_works], convert_to_tensor=True
+            )
+            # Compute cosine similarity between submission and author's works
+            similarities = util.cos_sim(submission_embedding, author_works_embeddings)
+            max_similarity = similarities.max().item()
+            avg_similarity = similarities.mean().item()
+            
+            author_recent_works = reviewers_info[reviewer_name]['recent_works']
+            if len(author_recent_works) > 0:
+                author_recent_works_embeddings = similarity_model.encode(
+                    [(work.get('title', '') or '') + ' ' + (work.get('abstract', '') or '') for work in author_recent_works], convert_to_tensor=True
+                )
+                recent_similarities = util.cos_sim(submission_embedding, author_recent_works_embeddings)
+                avg_recent_similarity = recent_similarities.mean().item()
+            
+            submission_id_field = 'id' if dataset_name == 'sw' else 'main'
+            if submission[submission_id_field] not in similarity_info:
+                similarity_info[submission[submission_id_field]] = {}
+            similarity_info[submission[submission_id_field]][reviewer_name] = {
+                "max_similarity": max_similarity,
+                "avg_similarity": avg_similarity,
+                "avg_recent_similarity": avg_recent_similarity
+            }
+    
+    return similarity_info
+            
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Find OpenAlex IDs for reviewers.")
@@ -170,9 +207,29 @@ if __name__ == "__main__":
 
     if args.dataset == 'sw':
         dataset_path = 'data/raw/semantic-web-journal.json'
-        output_path = 'data/processed/sw_reviewers_info.pkl'
-        find_openalex_id_of_sw_reviewers(dataset_path, output_path, specter_model)
+        output_path = 'data/processed/sw_reviewers_similarity_info.pkl'
     elif args.dataset == 'f1000':
         dataset_path = 'data/raw/f1000research.json'
-        output_path = 'data/processed/f1000_reviewers_info.pkl'
-        find_openalex_id_of_f1000_reviewers(dataset_path, output_path, specter_model)
+        output_path = 'data/processed/f1000_reviewers_similarity_info.pkl'
+        
+    # Load the Semantic Web data from JSON file
+    with open(dataset_path, 'r') as f:
+        dataset = json.load(f)
+    
+    reviewers_info = find_openalex_id_of_reviewers(dataset, args.dataset, specter_model)
+    reviewers_info_with_works = append_works_to_reviewers(reviewers_info)
+    
+    # Save the reviewers info with works to a pickle file
+    with open('data/processed/sw_reviewers_info_ww.pkl', 'wb') as f:
+        pickle.dump(reviewers_info_with_works, f)
+        
+    # Load the reviewers info with works from the pickle file
+    # with open('data/processed/sw_reviewers_info_ww.pkl', 'rb') as f:
+    #     reviewers_info_with_works = pickle.load(f)
+    
+    similarity_info = get_similarity_metrics_for_reviewers(dataset, args.dataset, reviewers_info_with_works, specter_model)
+    
+    # Save the processed data to a pickle file
+    with open(output_path, 'wb') as f:
+        pickle.dump(similarity_info, f)
+        

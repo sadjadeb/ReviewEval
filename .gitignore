@@ -1,2 +1,3 @@
 data/raw/f1000research.json
 .venv/
+human_annotation/assessments_output/

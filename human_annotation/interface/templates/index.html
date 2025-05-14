@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Paper Review Assessment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <h2 class="mb-4">Paper Review Assessment</h2>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5>Task Description:</h5>
+        <p>
+          You are asked to assess the quality and characteristics of peer reviews written for academic papers. Each page shows one paper with its title, abstract, and all associated reviews. For each review, you will evaluate a set of predefined metrics such as effort, sentiment, specificity, and overall quality.
+          Please carefully read each review and fill in all the metric fields using the dropdown options provided. Your input will help us build <strong>a reliable benchmark for evaluating review quality</strong> in scientific peer review.
+          At the end, enter your name and submit the form. Your assessments will be saved and used for research purposes only.
+          <br>
+          ⚠️ Note: Make sure all fields are filled out. You will not be able to submit the form otherwise.
+        </p>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h4>{{ paper.paper_id }}: {{ paper.title }}</h4>
+        <p><strong>Authors:</strong> {{ paper.authors }}</p>
+        <p><strong>Abstract:</strong> {{ paper.abstract }}</p>
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('submit') }}">
+      <input type="hidden" name="paper_id" value="{{ paper.paper_id }}">
+
+      <h3>Reviews</h3>
+      <hr>
+      {% for review in paper.reviews %}
+        {% set i = loop.index0 %}
+        <div class="mb-4">
+          <p><strong>Reviewer:</strong> {{ review.reviewer }} | <strong>Date:</strong> {{ review.review_date }}</p>
+          <p>{{ review.review_text }}</p>
+          <hr>
+
+          <div class="row">
+            {% for label, input_type, options in [
+              ('Length & Effort', 'select', ['Outstanding', 'Strong', 'Adequate', 'Fair', 'Poor']),   
+              ('Lexical Diversity (TTR)', 'select', ['Outstanding', 'Strong', 'Adequate', 'Fair', 'Poor']),
+              ('Sentiment Polarity', 'select', ['negative', 'neutral', 'positive']),
+              ('Politeness', 'select', ['polite', 'neutral', 'impolite']),
+              ('Hedging / Uncertainty', 'select', ['No Hedging', 'Minimal', 'Moderate', 'Heavy', 'Extreme']),
+              ('Specificity', 'select', ['very specific', 'somewhat specific', 'neutral', 'broad', 'very broad']),
+              ('Use of Domain-Specific Terms', 'select', ['Outstanding', 'Strong', 'Adequate', 'Fair', 'Poor']),
+              ('Relevance Alignment', 'select', ['Outstanding', 'Strong', 'Adequate', 'Fair', 'Poor']),
+              ('Readability', 'select', ['Outstanding', 'Strong', 'Adequate', 'Fair', 'Poor']),
+              ('Overall Quality', 'number', {'min': 0, 'max': 100})
+            ] %}
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><strong>{{ label }}</strong></label>
+              {% if input_type == 'select' %}
+                <select class="form-select" name="review_{{i}}_{{loop.index0}}" required>
+                  <option value="" disabled selected>-- select --</option>
+                  {% for option in options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                  {% endfor %}
+                </select>
+              {% else %}
+                <input type="{{ input_type }}" class="form-control" name="review_{{i}}_{{loop.index0}}" required
+                  {% for k, v in options.items() %} {{k}}="{{v}}" {% endfor %}>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Your Name</strong></label>
+        <input type="text" class="form-control" name="assessor" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit Assessment</button>
+
+      <div class="mb-4">
+        
+      </div>
+
+    </form>
+  </div>
+</body>
+</html>

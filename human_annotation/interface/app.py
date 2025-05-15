@@ -13,6 +13,15 @@ OUTPUT_DIR = '../assessments_output/'
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
+LABEL_TO_INT_MAP = {
+    "Outstanding": 5,
+    "Strong": 4,
+    "Adequate": 3,
+    "Weak": 2,
+    "Very weak": 1,
+    "Absent/irrelevant": 0
+}
+
 # Load all review data
 def load_reviews():
     with open(INPUT_FILE, 'r', encoding='utf-8') as f:
@@ -77,14 +86,6 @@ def submit():
     # Get grouped reviews
     all_papers = load_reviews()
     reviews = all_papers[int(paper_id)]
-    
-    LABEL_TO_INT_MAP = {
-        "Outstanding": 5,
-        "Strong": 4,
-        "Adequate": 3,
-        "Fair": 2,
-        "Poor": 1,
-    }
 
     output = {
         "assessor": assessor,
@@ -94,8 +95,9 @@ def submit():
     }
 
     metric_names = [
-        "Length-Effort", "Lexical-Diversity", "Sentiment-Polarity", "Politeness", "Hedging", "Specificity",
-        "Domain-Terms", "Relevance-Alignment", "Readability", "Overall-Quality"
+        "Comprehensiveness", "Usage_of_Technical_Terms", "Factuality", "Sentiment_Polarity",
+        "Politeness", "Vagueness", "Objectivity", "Fairness",
+        "Actionability", "Constructiveness", "Relevance_Alignment", "Clarity_and_Readability", "Overall_Quality"
     ]
 
     for i, review in enumerate(reviews):

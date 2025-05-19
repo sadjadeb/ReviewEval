@@ -1,0 +1,5 @@
+nohup: ignoring input
+Input Notebook:  llm_analysis_human_annotation.ipynb
+Output Notebook: qwen_output.ipynb
+Executing:   0%|          | 0/5 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:  20%|██        | 1/5 [00:01<00:06,  1.71s/cell]Executing:  40%|████      | 2/5 [7:39:17<13:30:30, 16210.02s/cell]Executing:  60%|██████    | 3/5 [7:39:17<4:53:36, 8808.26s/cell]  Executing:  80%|████████  | 4/5 [7:39:17<1:28:50, 5330.92s/cell]Executing: 100%|██████████| 5/5 [7:39:17<00:00, 3408.59s/cell]  Executing: 100%|██████████| 5/5 [7:39:18<00:00, 5511.70s/cell]

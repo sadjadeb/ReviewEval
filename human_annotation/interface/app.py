@@ -45,6 +45,7 @@ def get_balanced_paper(papers):
             with open(os.path.join(OUTPUT_DIR, fname), 'r') as f:
                 entry = json.load(f)
                 pid = entry.get('paper_id')
+                pid = int(pid)
                 if pid in paper_counts:
                     paper_counts[pid] += 1
         except Exception:
@@ -71,6 +72,31 @@ def index():
         "reviews": reviews
     }
     return render_template('index.html', paper=paper_info)
+
+
+@app.route('/leaderboard', methods=['GET'])
+def leaderboard():
+    from collections import Counter
+
+    submissions = []
+    total_assessments = 0
+
+    for fname in os.listdir(OUTPUT_DIR):
+        if not fname.endswith('.json'):
+            continue
+        try:
+            with open(os.path.join(OUTPUT_DIR, fname), 'r') as f:
+                entry = json.load(f)
+                assessor = entry.get('assessor', 'unknown')
+                submissions.append(assessor)
+                total_assessments += 1
+        except Exception:
+            continue
+
+    assessor_counts = Counter(submissions)
+    sorted_leaderboard = sorted(assessor_counts.items(), key=lambda x: (-x[1], x[0]))
+
+    return render_template('leaderboard.html', leaderboard=sorted_leaderboard, total_assessments=total_assessments)
 
 
 @app.route('/submit', methods=['POST'])

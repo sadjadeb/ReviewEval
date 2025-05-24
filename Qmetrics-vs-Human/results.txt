@@ -1,0 +1,78 @@
+Kendall Tau:
+---------------------
+Qwen: 0.272 ± 0.079
+GPT: 0.372 ± 0.100
+Phi: 0.254 ± 0.116
+Random Forest: 0.442 ± 0.089
+SVR: 0.454 ± 0.089
+Linear Regression: 0.451 ± 0.107
+Neural Network: 0.421 ± 0.095
+XGBoost: 0.380 ± 0.075
+
+Krippendorff Alpha:
+--------------------
+Qwen: 0.164 ± 0.109
+GPT: 0.401 ± 0.119
+Phi: 0.191 ± 0.149
+Random Forest: 0.578 ± 0.107
+SVR: 0.559 ± 0.093
+Linear Regression: 0.530 ± 0.118
+Neural Network: 0.562 ± 0.104
+XGBoost: 0.510 ± 0.085
+
+
+Average Feature Importance Across All Folds:
+Random Forest:
+  length_words: 0.5129 ± 0.0143
+  readability: 0.1051 ± 0.0056
+  similarity_score: 0.0885 ± 0.0026
+  sentiment_polarity: 0.0738 ± 0.0059
+  politeness_score: 0.0724 ± 0.0058
+  mattr: 0.0637 ± 0.0044
+  hedging: 0.0423 ± 0.0041
+  question_count: 0.0292 ± 0.0026
+  citation_count: 0.0121 ± 0.0017
+
+SVR:
+  politeness_score: 0.4155 ± 0.0587
+  similarity_score: 0.3210 ± 0.0582
+  sentiment_polarity: 0.1085 ± 0.0318
+  citation_count: 0.0520 ± 0.0168
+  hedging: 0.0443 ± 0.0062
+  readability: 0.0249 ± 0.0046
+  question_count: 0.0147 ± 0.0137
+  mattr: 0.0145 ± 0.0116
+  length_words: 0.0046 ± 0.0005
+
+Linear Regression:
+  hedging: 0.7731 ± 0.0303
+  similarity_score: 0.0762 ± 0.0277
+  mattr: 0.0710 ± 0.0293
+  sentiment_polarity: 0.0393 ± 0.0210
+  politeness_score: 0.0368 ± 0.0082
+  citation_count: 0.0014 ± 0.0005
+  readability: 0.0010 ± 0.0001
+  question_count: 0.0010 ± 0.0003
+  length_words: 0.0002 ± 0.0000
+
+Neural Network:
+  length_words: 0.7906 ± 0.1602
+  readability: 0.1967 ± 0.1803
+  citation_count: 0.0467 ± 0.0811
+  mattr: 0.0019 ± 0.0016
+  sentiment_polarity: 0.0018 ± 0.0032
+  hedging: -0.0001 ± 0.0003
+  similarity_score: -0.0004 ± 0.0028
+  politeness_score: -0.0018 ± 0.0103
+  question_count: -0.0355 ± 0.0838
+
+XGBoost:
+  length_words: 0.3093 ± 0.0171
+  hedging: 0.1252 ± 0.0184
+  readability: 0.1228 ± 0.0176
+  similarity_score: 0.1033 ± 0.0136
+  politeness_score: 0.0959 ± 0.0132
+  sentiment_polarity: 0.0841 ± 0.0100
+  mattr: 0.0642 ± 0.0108
+  question_count: 0.0508 ± 0.0086
+  citation_count: 0.0444 ± 0.0167

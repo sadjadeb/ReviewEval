@@ -1,0 +1,5 @@
+nohup: ignoring input
+Input Notebook:  llm_analysis_neurips.ipynb
+Output Notebook: qwen_output.ipynb
+Executing:   0%|          | 0/5 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:  20%|██        | 1/5 [00:02<00:08,  2.14s/cell]Executing:  40%|████      | 2/5 [31:49:55<56:10:26, 67408.97s/cell]Executing:  60%|██████    | 3/5 [31:49:56<20:20:58, 36629.10s/cell]Executing:  80%|████████  | 4/5 [31:49:57<6:09:28, 22168.65s/cell] Executing: 100%|██████████| 5/5 [31:49:58<00:00, 14174.76s/cell]  Executing: 100%|██████████| 5/5 [31:49:59<00:00, 22919.85s/cell]

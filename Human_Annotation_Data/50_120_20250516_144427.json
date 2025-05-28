@@ -1,0 +1,33 @@
+{
+  "assessor": "50",
+  "paper_id": "120",
+  "submitted_at": "2025-05-16T14:44:27.215679",
+  "metrics": {
+    "review_Peter-W.-Glynn_Comprehensiveness": 1,
+    "review_Peter-W.-Glynn_Usage_of_Technical_Terms": 4,
+    "review_Peter-W.-Glynn_Factuality": "partially factual",
+    "review_Peter-W.-Glynn_Sentiment_Polarity": "neutral",
+    "review_Peter-W.-Glynn_Politeness": "polite",
+    "review_Peter-W.-Glynn_Vagueness": "moderate",
+    "review_Peter-W.-Glynn_Objectivity": 3,
+    "review_Peter-W.-Glynn_Fairness": 3,
+    "review_Peter-W.-Glynn_Actionability": 4,
+    "review_Peter-W.-Glynn_Constructiveness": 4,
+    "review_Peter-W.-Glynn_Relevance_Alignment": 3,
+    "review_Peter-W.-Glynn_Clarity_and_Readability": 4,
+    "review_Peter-W.-Glynn_Overall_Quality": 70,
+    "review_Ciemon-Frank-Caballes_Comprehensiveness": 0,
+    "review_Ciemon-Frank-Caballes_Usage_of_Technical_Terms": 4,
+    "review_Ciemon-Frank-Caballes_Factuality": "unfactual",
+    "review_Ciemon-Frank-Caballes_Sentiment_Polarity": "neutral",
+    "review_Ciemon-Frank-Caballes_Politeness": "polite",
+    "review_Ciemon-Frank-Caballes_Vagueness": "high",
+    "review_Ciemon-Frank-Caballes_Objectivity": 2,
+    "review_Ciemon-Frank-Caballes_Fairness": 3,
+    "review_Ciemon-Frank-Caballes_Actionability": 1,
+    "review_Ciemon-Frank-Caballes_Constructiveness": 1,
+    "review_Ciemon-Frank-Caballes_Relevance_Alignment": 2,
+    "review_Ciemon-Frank-Caballes_Clarity_and_Readability": 3,
+    "review_Ciemon-Frank-Caballes_Overall_Quality": 2
+  }
+}

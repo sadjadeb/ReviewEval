@@ -110,7 +110,6 @@ NDCG@20: 0.8088
 
 
 #### F4
-
 Running on: 
 Using Java version:
 Parameter containing:
@@ -149,8 +148,6 @@ NDCG@20: 0.8471
 
 
 #### F5
-
-
 Running on: 
 Using Java version:
 Parameter containing:

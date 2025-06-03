@@ -5,14 +5,12 @@ This repository contains the code and data for the paper "**RottenReviews** : Be
 By following the instructions below, you can download the dataset and run files to either reproduce the results or use the dataset for your research.
 
 # Dataset
-TBD
 
 
 ### Download the Dataset
-TBD
+
 
 ### Dataset Files
-TBD
 
 
 # Results Analysis

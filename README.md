@@ -6,11 +6,50 @@ By following the instructions below, you can download the dataset and run files 
 
 # Dataset
 
-
 ### Download the Dataset
 
-
 ### Dataset Files
+
+# Statistics
+
+<div align="center">
+
+### Statistics of the `RottenReviews` Dataset
+
+| Feature                  | NeurIPs | ICLR   | F1000 | SWJ  |
+|--------------------------|--------:|-------:|------:|-----:|
+| # Papers                 | 3,395   | 7,262  | 4,509 | 796  |
+| # Reviews                | 15,175  | 28,028 | 9,482 | 2,337|
+| Avg # Reviews per paper  | 4.47    | 3.86   | 2.10  | 2.93 |
+| # Identified Reviewers   | N/A     | N/A    | 8,831 | 701  |
+
+</div>
+
+<div align="center">
+
+### Statistics of Review-dependent (above) and Reviewer-dependent (below) Quantifiable Metrics
+
+| Metric                         | NeurIPs | ICLR   | F1000  | SWJ     |
+|-------------------------------|--------:|-------:|-------:|--------:|
+| Review Length                 | 439.4   | 424.5  | 398.17 | 782.09  |
+| # References                  | 1.25    | 1.42   | 0.29   | 2.29    |
+| # Section-specific Comments   | 1.43    | 1.73   | 1.78   | 7.27    |
+| Semantic Alignment            | 0.90    | 0.90   | 0.88   | 0.90    |
+| Timeliness                    | 59.13   | 39.81  | 142.36 | 89.46   |
+| Politeness                    | 0.84    | 0.81   | 0.83   | 0.75    |
+| Readability                   | 38.02   | 37.65  | 36.60  | 43.86   |
+| Lexical Diversity             | 0.77    | 0.77   | 0.76   | 0.76    |
+| # Raised Questions            | 3.76    | 4.02   | 1.72   | 2.88    |
+| Sentiment Polarity            | 0.11    | 0.11   | 0.15   | 0.10    |
+| Hedging                       | 0.005   | 0.009  | 0.013  | 0.007   |
+| **General Topic Alignment**   | N/A     | N/A    | 0.74   | 0.76    |
+| **Recency-Based Topic Align.**| N/A     | N/A    | 0.65   | 0.64    |
+| **In-depth Topical Alignment**| N/A     | N/A    | 0.87   | 0.88    |
+| **Reviewer’s Citation**       | N/A     | N/A    | 4683.0 | 2476.08 |
+| **Reviewer’s Academic Tenure**| N/A     | N/A    | 29.16  | 25.68   |
+
+</div>
+
 
 
 # Results Analysis

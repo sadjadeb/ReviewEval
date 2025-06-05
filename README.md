@@ -7,12 +7,31 @@ By following the instructions below, you can download the dataset and run files 
 # Dataset
 
 ### Download the Dataset
+To download the dataset from Google Drive, you can use the following commands:
 
-### Dataset Files
+Note: You need to install the gdown package to download the dataset.
+```bash
+pip install gdown
+```
+
+If you already have the gdown package installed, you can use the following commands to download the dataset:
+```bash
+cd RottenReviews/
+gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMPnwqJrYV?usp=sharing
+```
+
+### Dataset Files Overview
+| Folder Name   | File Name               | File Size | Number of Records | Format  |
+|---------------|-------------------------|-----------|-------------------|---------|
+| raw      | raw/f1000research       | 497 MB    | 4,509            | JSON    |
+| raw      | raw/semantic-web-journal| 12.7 MB   | 796              | JSON    |
+| raw      | raw/iclr-2024          | 148 MB    | 7,262            | PKL     |
+| raw      | raw/neurips-2023       | 81.6 MB   | 3,395            | PKL     |
+
 
 # Statistics
 
-<div align="center">
+<!-- <div align="center">
 
 ### Statistics of the `RottenReviews` Dataset
 
@@ -23,7 +42,7 @@ By following the instructions below, you can download the dataset and run files 
 | Avg # Reviews per paper  | 4.47    | 3.86   | 2.10  | 2.93 |
 | # Identified Reviewers   | N/A     | N/A    | 8,831 | 701  |
 
-</div>
+</div> -->
 
 <div align="center">
 

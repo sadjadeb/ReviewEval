@@ -38,74 +38,50 @@ gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMP
 | processed     | HA_ALL_gpt             | 45 KB     | Review      | 661        | CSV     |
 
 
-
-
-
 # Statistics
 
-<!-- <div align="center">
+### Statistics of Quantifiable Metrics
+These metrics are defined and obtained using quantifiable methods. To compute these numbers on your own, you can run the "Process Raw Data" section of the notebooks provided for each venue in the [feature_extraction](feature_extraction/) folder.
 
-### Statistics of the `RottenReviews` Dataset
+| Metric                         | Dependency | NeurIPs | ICLR   | F1000  | SWJ     |
+|-------------------------------|------------|--------:|-------:|-------:|--------:|
+| Review Length                 | Review     | 439.4   | 424.5  | 398.17 | 782.09  |
+| # References                  | Review     | 1.25    | 1.42   | 0.29   | 2.29    |
+| # Section-specific Comments   | Review     | 1.43    | 1.73   | 1.78   | 7.27    |
+| Semantic Alignment            | Review     | 0.90    | 0.90   | 0.88   | 0.90    |
+| Timeliness                    | Review     | 59.13   | 39.81  | 142.36 | 89.46   |
+| Politeness                    | Review     | 0.84    | 0.81   | 0.83   | 0.75    |
+| Readability                   | Review     | 38.02   | 37.65  | 36.60  | 43.86   |
+| Lexical Diversity             | Review     | 0.77    | 0.77   | 0.76   | 0.76    |
+| # Raised Questions            | Review     | 3.76    | 4.02   | 1.72   | 2.88    |
+| Sentiment Polarity            | Review     | 0.11    | 0.11   | 0.15   | 0.10    |
+| Hedging                       | Review     | 0.005   | 0.009  | 0.013  | 0.007   |
+| General Topic Alignment   | Reviewer   | N/A     | N/A    | 0.74   | 0.76    |
+| Recency-Based Topic Align | Reviewer   | N/A     | N/A    | 0.65   | 0.64    |
+| In-depth Topical Alignment| Reviewer   | N/A     | N/A    | 0.87   | 0.88    |
+| Reviewer’s Citation       | Reviewer   | N/A     | N/A    | 4683.0 | 2476.08 |
+| Reviewer’s Academic Tenure| Reviewer   | N/A     | N/A    | 29.16  | 25.68   |
 
-| Feature                  | NeurIPs | ICLR   | F1000 | SWJ  |
-|--------------------------|--------:|-------:|------:|-----:|
-| # Papers                 | 3,395   | 7,262  | 4,509 | 796  |
-| # Reviews                | 15,175  | 28,028 | 9,482 | 2,337|
-| Avg # Reviews per paper  | 4.47    | 3.86   | 2.10  | 2.93 |
-| # Identified Reviewers   | N/A     | N/A    | 8,831 | 701  |
 
-</div> -->
-
+# Visualizations
 <div align="center">
-
-### Statistics of Review-dependent (above) and Reviewer-dependent (below) Quantifiable Metrics
-
-| Metric                         | NeurIPs | ICLR   | F1000  | SWJ     |
-|-------------------------------|--------:|-------:|-------:|--------:|
-| Review Length                 | 439.4   | 424.5  | 398.17 | 782.09  |
-| # References                  | 1.25    | 1.42   | 0.29   | 2.29    |
-| # Section-specific Comments   | 1.43    | 1.73   | 1.78   | 7.27    |
-| Semantic Alignment            | 0.90    | 0.90   | 0.88   | 0.90    |
-| Timeliness                    | 59.13   | 39.81  | 142.36 | 89.46   |
-| Politeness                    | 0.84    | 0.81   | 0.83   | 0.75    |
-| Readability                   | 38.02   | 37.65  | 36.60  | 43.86   |
-| Lexical Diversity             | 0.77    | 0.77   | 0.76   | 0.76    |
-| # Raised Questions            | 3.76    | 4.02   | 1.72   | 2.88    |
-| Sentiment Polarity            | 0.11    | 0.11   | 0.15   | 0.10    |
-| Hedging                       | 0.005   | 0.009  | 0.013  | 0.007   |
-| **General Topic Alignment**   | N/A     | N/A    | 0.74   | 0.76    |
-| **Recency-Based Topic Align.**| N/A     | N/A    | 0.65   | 0.64    |
-| **In-depth Topical Alignment**| N/A     | N/A    | 0.87   | 0.88    |
-| **Reviewer’s Citation**       | N/A     | N/A    | 4683.0 | 2476.08 |
-| **Reviewer’s Academic Tenure**| N/A     | N/A    | 29.16  | 25.68   |
-
+  <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="350"/>
+  <img src="images/corr-qmetric-vs-qmetric-f1000.png" alt="Alt text" height="350"/>
 </div>
-
-
-
-# Results Analysis
-Kendall’s $\tau$ correlation between human-evaluated quality dimensions ($Y$-axis) and quantifiable metrics ($X$-axis).
 <p align="center">
-  <img src="images/corr-human-vs-qmetric.png" alt="Alt text" width="600"/>
+  <em>Left: Kendall’s $\tau$ correlation between human-evaluated quality dimensions ($Y$-axis) and quantifiable metrics ($X$-axis). Right: Correlation between quantifiable metrics on F1000.</em>
 </p>
 
 
-Correlation between quantifiable metrics on F1000.
-<p align="center">
-  <img src="images/corr-qmetric-vs-qmetric-f1000.png" alt="Alt text" width="600"/>
-</p>
-
-
-Kendall’s $\tau$ correlation between human-evaluated  and LLMs-evaluated quality dimensions
 <p align="center">
   <img src="images/kendall-tau-llms.png" alt="Alt text" width="600"/>
 </p>
+<p align="center"><em>Kendall’s $\tau$ correlation between human-evaluated  and LLMs-evaluated quality dimensions.</em></p>
 
-
-Kendall’s $\tau$ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.
 <p align="center">
   <img src="images/model-comparison.png" alt="Alt text" width="600"/>
 </p>
+<p align="center"><em>Kendall’s $\tau$ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em></p>
 
 
 # Abstract
@@ -113,4 +89,4 @@ The quality of peer review plays a critical role in scientific publishing, yet r
 
 
 # Citation
-TBD
+[Placeholder]

@@ -19,24 +19,24 @@ If you already have the gdown package installed, you can use the following comma
 cd RottenReviews/
 gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMPnwqJrYV?usp=sharing
 ```
-
 ### Dataset Files Overview
-| Folder Name   | File Name               | File Size | Number of Records | Format  |
-|---------------|-------------------------|-----------|-------------------|---------|
-| raw      | f1000research       | 497 MB    | 4,509 Submission            | JSON    |
-| raw      | semantic-web-journal| 12.7 MB   | 796 Submission              | JSON    |
-| raw      | iclr-2024          | 148 MB    | 7,262 Submission           | PKL     |
-| raw      | neurips-2023       | 81.6 MB   | 3,395 Submission           | PKL     |
-| processed      | f1000research       | 41.2 MB    | 9,482 Review           | CSV    |
-| processed      | semantic-web-journal| 14.6 MB   | 2,337 Review             | CSV    |
-| processed      | iclr-2024          | 147 MB    | 28,028 Review           | JSON     |
-| processed      | neurips-2023       | 80.6 MB   | 15,175 Review           | JSON     |
-| processed      | merged-200-papers       | 3.3 MB   | 200 Submission           | JSON     |
-| processed      | HA_ALL_qmetrics       | 3.3 MB   | 661 Review           | JSON     |
-| processed      | HA_ALL_qwen       | 3.5 MB   | 661 Review           | JSON     |
-| processed      | HA_ALL_llama       | 3.3 MB   | 661 Review           | JSON     |
-| processed      | HA_ALL_phi4       | 46 KB   | 661 Review           | CSV     |
-| processed      | HA_ALL_gpt       | 45 KB   | 661 Review           | CSV     |
+| Folder Name   | File Name               | File Size | Record Type | Number of Records | Format  |
+|---------------|-------------------------|-----------|-------------|-------------------|---------|
+| raw           | f1000research          | 497 MB    | Submission  | 4,509 Submission  | JSON    |
+| raw           | semantic-web-journal   | 12.7 MB   | Submission  | 796 Submission    | JSON    |
+| raw           | iclr-2024              | 148 MB    | Submission  | 7,262 Submission  | PKL     |
+| raw           | neurips-2023           | 81.6 MB   | Submission  | 3,395 Submission  | PKL     |
+|---------------|-------------------------|-----------|-------------|-------------------|---------|
+| processed     | f1000research          | 41.2 MB   | Review      | 9,482 Review      | CSV     |
+| processed     | semantic-web-journal   | 14.6 MB   | Review      | 2,337 Review      | CSV     |
+| processed     | iclr-2024              | 147 MB    | Review      | 28,028 Review     | JSON    |
+| processed     | neurips-2023           | 80.6 MB   | Review      | 15,175 Review     | JSON    |
+| processed     | merged-200-papers      | 3.3 MB    | Submission  | 200 Submission    | JSON    |
+| processed     | HA_ALL_qmetrics        | 3.3 MB    | Review      | 661 Review        | JSON    |
+| processed     | HA_ALL_qwen            | 3.5 MB    | Review      | 661 Review        | JSON    |
+| processed     | HA_ALL_llama           | 3.3 MB    | Review      | 661 Review        | JSON    |
+| processed     | HA_ALL_phi4            | 46 KB     | Review      | 661 Review        | CSV     |
+| processed     | HA_ALL_gpt             | 45 KB     | Review      | 661 Review        | CSV     |
 
 
 

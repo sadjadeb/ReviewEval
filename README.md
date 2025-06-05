@@ -69,19 +69,19 @@ These metrics are defined and obtained using quantifiable methods. To compute th
   <img src="images/corr-qmetric-vs-qmetric-f1000.png" alt="Alt text" height="300"/>
 </div>
 <p align="center">
-  <em>Left: Kendall’s $\tau$ correlation between human-evaluated quality dimensions ($Y$-axis) and quantifiable metrics ($X$-axis). Right: Correlation between quantifiable metrics on F1000.</em>
+  <em>Left: Kendall’s τ correlation between human-evaluated quality dimensions Y-axis and quantifiable metrics X-axis. Right: Correlation between quantifiable metrics on F1000.</em>
 </p>
 
 
 <p align="center">
   <img src="images/kendall-tau-llms.png" alt="Alt text" width="600"/>
 </p>
-<p align="center"><em>Kendall’s $\tau$ correlation between human-evaluated  and LLMs-evaluated quality dimensions.</em></p>
+<p align="center"><em>Kendall’s τ correlation between human-evaluated and LLMs-evaluated quality dimensions.</em></p>
 
 <p align="center">
   <img src="images/model-comparison.png" alt="Alt text" width="600"/>
 </p>
-<p align="center"><em>Kendall’s $\tau$ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em></p>
+<p align="center"><em>Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em></p>
 
 
 # Abstract

@@ -65,8 +65,8 @@ These metrics are defined and obtained using quantifiable methods. To compute th
 
 # Visualizations
 <div align="center">
-  <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="350"/>
-  <img src="images/corr-qmetric-vs-qmetric-f1000.png" alt="Alt text" height="350"/>
+  <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="300"/>
+  <img src="images/corr-qmetric-vs-qmetric-f1000.png" alt="Alt text" height="300"/>
 </div>
 <p align="center">
   <em>Left: Kendall’s $\tau$ correlation between human-evaluated quality dimensions ($Y$-axis) and quantifiable metrics ($X$-axis). Right: Correlation between quantifiable metrics on F1000.</em>

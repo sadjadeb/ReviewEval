@@ -7,8 +7,6 @@ By following the instructions below, you can download the dataset and run files 
 # Dataset
 
 ### Download the Dataset
-To download the dataset from Google Drive, you can use the following commands:
-
 Note: You need to install the gdown package to download the dataset.
 ```bash
 pip install gdown
@@ -36,10 +34,12 @@ gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMP
 | processed     | HA_ALL_llama           | 3.3 MB    | Review      | 661        | JSON    |
 | processed     | HA_ALL_phi4            | 46 KB     | Review      | 661        | CSV     |
 | processed     | HA_ALL_gpt             | 45 KB     | Review      | 661        | CSV     |
-
+| processed     | f1000_reviewers_info   | 2.87 GB   | Reviewer    | 8831       | PKL     |
+| processed     | sw_reviewers_info      | 93.4 MB   | Reviewer    | 701        | PKL     |
+| processed     | f1000_reviewers_similarity_info   | 1.2 MB   | Reviewer    | 8831       | PKL     |
+| processed     | sw_reviewers_similarity_info      | 72 KB    | Reviewer    | 701       | PKL     |
 
 # Statistics
-
 ### Statistics of Quantifiable Metrics
 These metrics are defined and obtained using quantifiable methods. To compute these numbers on your own, you can run the "Process Raw Data" section of the notebooks provided for each venue in the [feature_extraction](feature_extraction/) folder. Also, to get the results for LLMs, you can run the LLM section of the same notebooks.
 
@@ -62,7 +62,6 @@ These metrics are defined and obtained using quantifiable methods. To compute th
 | Reviewer’s Citation       | Reviewer   | N/A     | N/A    | 4683.0 | 2476.08 |
 | Reviewer’s Academic Tenure| Reviewer   | N/A     | N/A    | 29.16  | 25.68   |
 
-
 # Visualizations
 <div align="center">
   <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="320"/>
@@ -74,7 +73,6 @@ These metrics are defined and obtained using quantifiable methods. To compute th
 
 ---
 
-
 <div align="center">
   <img src="images/kendall-tau-llms.png" alt="Alt text" height="320" style="transform: rotate(-90deg);"/>
   <img src="images/model-comparison.png" alt="Alt text" height="320"/>
@@ -82,7 +80,6 @@ These metrics are defined and obtained using quantifiable methods. To compute th
 <p align="center">
   <em>Left: Kendall’s τ correlation between human-evaluated and LLMs-evaluated quality dimensions. Right: Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em>
 </p>
-
 
 # Abstract
 The quality of peer review plays a critical role in scientific publishing, yet remains poorly understood and challenging to evaluate at scale. In this work, we introduce *RottenReviews*, a benchmark designed to facilitate systematic assessment of review quality. *RottenReviews* comprises over 15,000 submissions from four distinct academic venues enriched with over 9,000 reviewer scholarly profiles and paper metadata. We define and compute a diverse set of quantifiable review-dependent and reviewer-dependent metrics, and compare them against structured assessments from large language models (LLMs) and expert human annotations. Our human-annotated subset includes over 700 paper–review pairs labeled across 13 explainable and conceptual dimensions of review quality. Our empirical findings reveal that LLMs, both zero-shot and fine-tuned, exhibit limited alignment with human expert evaluations of peer review quality. Surprisingly, simple interpretable models trained on quantifiable features outperform fine-tuned LLMs in predicting overall review quality.

@@ -21,24 +21,24 @@ gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMP
 ```
 RottenReviews
 ├─ data
-│  ├─ human-annotation-data/ all the human annotated data would appear here
-│  ├─ processed/ all the processed and cleaned data would appear here
-│  └─ raw/ all the raw data crawled from different venues would appear here
+│  ├─ human-annotation-data/ (all the human annotated data would appear here)
+│  ├─ processed/ (all the processed and cleaned data would appear here)
+│  └─ raw/ (all the raw data crawled from different venues would appear here)
 ├─ feature_analysis
-│  ├─ Figure/ all the figures and visualizations would appear here
+│  ├─ Figure/ (all the figures and visualizations would appear here)
 │  ├─ stats-qmetrics-distributions-f1000-swj.ipynb
 │  └─ stats-qmetrics-distributions-iclr-neurips-HA.ipynb
 ├─ feature_extraction
 │  └─ process-neurips2023.ipynb
 ├─ human_annotation
 │  ├─ HA-decision-vs-overall-quality.ipynb
-│  ├─ interface/ web application for gathering human annotation data
+│  ├─ interface/ (web application for gathering human annotation data)
 │  ├─ llm-process-human-annotation-data.ipynb
 │  ├─ llm-self-correlation-map.ipynb
 │  └─ llm-vs-human-kendaltau.ipynb
-├─ images/ all the figures presented in README.md
+├─ images/ (all the figures presented in README.md)
 ├─ predict_review_quality_score
-│  ├─ Folds/ train and test splitted data with 5 folds
+│  ├─ Folds/ (train and test splitted data with 5 folds)
 │  ├─ all_folds_data.csv
 │  ├─ classical-ml-vs-llms.ipynb
 │  ├─ human_llms_qmetrics.csv

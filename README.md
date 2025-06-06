@@ -60,6 +60,8 @@ Furthermore, you can customize the LLM model used by modifying the `llm_name` va
 After executing the notebooks in the [feature_extraction](feature_extraction/) folder, you can further analyze the results by plotting the distribution of each metric, as well as examining correlation maps and relationships between quantifiable metrics, human-annotated data, and LLM evaluations. To perform these analyses, run the notebooks in the [feature_analysis](feature_analysis/) folder. The resulting visualizations will be saved in the [feature_analysis/Figures](feature_analysis/Figures) directory.
 
 You can find some of these results and viusalizations in the following table and figures:
+<div align="center">
+
 ### Quantifiable Metric Statistics
 | Metric                         | Dependency | NeurIPs | ICLR   | F1000  | SWJ     |
 |-------------------------------|------------|--------:|-------:|-------:|--------:|
@@ -80,8 +82,11 @@ You can find some of these results and viusalizations in the following table and
 | Reviewer’s Citation           | Reviewer   | N/A     | N/A    | 4683.0 | 2476.08 |
 | Reviewer’s Academic Tenure    | Reviewer   | N/A     | N/A    | 29.16  | 25.68   |
 
-### Correlation Maps
+</div>
+
 <div align="center">
+
+### Correlation Maps
   <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="320"/>
   <img src="images/corr-qmetric-vs-qmetric-f1000.png" alt="Alt text" height="320"/>
 </div>

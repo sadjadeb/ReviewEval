@@ -1,11 +1,9 @@
 # RottenReviews: Benchmarking Review Quality with Human and LLM-Based Judgments
-
 This repository contains the code and data for the paper "**RottenReviews** : Benchmarking Review Quality with Human and LLM-Based Judgments". It should be noted that due to the size of the dataset, we are unable to provide the full dataset in this repository. Hence, the repository contains the codes for the sake of reproducibility and the data are available on Google Drive.
 
 By following the instructions below, you can download the dataset and run files to either reproduce the results or use the dataset for your research.
 
 # Dataset
-
 ### Download the Dataset
 Note: You need to install the gdown package to download the dataset.
 ```bash
@@ -50,10 +48,19 @@ RottenReviews
 └─ .gitignore
 ```
 
-# Statistics
-### Statistics of Quantifiable Metrics
-These metrics are defined and obtained using quantifiable methods. To compute these numbers on your own, you can run the "Process Raw Data" section of the notebooks provided for each venue in the [feature_extraction](feature_extraction/) folder. Also, to get the results for LLMs, you can run the LLM section of the same notebooks.
+# Reproduce the result
 
+## Feature Extraction and Analysis
+To extract the defined features, start by using the notebooks located in the [feature_extraction](feature_extraction/) folder. There are four notebooks, each designed to extract features from the raw data of a specific venue. Within each notebook, you will find a section named `Process Raw Data`. This section processes the raw data, extracts all the defined features, and appends them to create a comprehensive dataframe. The final processed files for each venue can then be saved in the [data/processed](data/processed) folder.
+
+Each notebook also includes two additional sections: `Random Sample 1000` and `LLM`. The `Random Sample 1000` section allows you to randomly sample 1000 papers and their reviews for processing using LLMs. If you wish to process all reviews for all papers using LLMs, you can skip the `Random Sample 1000` section and directly run the `LLM` section. 
+
+Furthermore, you can customize the LLM model used by modifying the `llm_name` variable in the code. For this part, the `ollama` library was utilized.
+
+After executing the notebooks in the [feature_extraction](feature_extraction/) folder, you can further analyze the results by plotting the distribution of each metric, as well as examining correlation maps and relationships between quantifiable metrics, human-annotated data, and LLM evaluations. To perform these analyses, run the notebooks in the [feature_analysis](feature_analysis/) folder. The resulting visualizations will be saved in the [feature_analysis/Figures](feature_analysis/Figures) directory.
+
+You can find some of these results and viusalizations in the following table and figures:
+### Quantifiable Metric Statistics
 | Metric                         | Dependency | NeurIPs | ICLR   | F1000  | SWJ     |
 |-------------------------------|------------|--------:|-------:|-------:|--------:|
 | Review Length                 | Review     | 439.4   | 424.5  | 398.17 | 782.09  |
@@ -67,13 +74,13 @@ These metrics are defined and obtained using quantifiable methods. To compute th
 | # Raised Questions            | Review     | 3.76    | 4.02   | 1.72   | 2.88    |
 | Sentiment Polarity            | Review     | 0.11    | 0.11   | 0.15   | 0.10    |
 | Hedging                       | Review     | 0.005   | 0.009  | 0.013  | 0.007   |
-| General Topic Alignment   | Reviewer   | N/A     | N/A    | 0.74   | 0.76    |
-| Recency-Based Topic Align | Reviewer   | N/A     | N/A    | 0.65   | 0.64    |
-| In-depth Topical Alignment| Reviewer   | N/A     | N/A    | 0.87   | 0.88    |
-| Reviewer’s Citation       | Reviewer   | N/A     | N/A    | 4683.0 | 2476.08 |
-| Reviewer’s Academic Tenure| Reviewer   | N/A     | N/A    | 29.16  | 25.68   |
+| General Topic Alignment       | Reviewer   | N/A     | N/A    | 0.74   | 0.76    |
+| Recency-Based Topic Alignment | Reviewer   | N/A     | N/A    | 0.65   | 0.64    |
+| In-depth Topical Alignment    | Reviewer   | N/A     | N/A    | 0.87   | 0.88    |
+| Reviewer’s Citation           | Reviewer   | N/A     | N/A    | 4683.0 | 2476.08 |
+| Reviewer’s Academic Tenure    | Reviewer   | N/A     | N/A    | 29.16  | 25.68   |
 
-# Visualizations
+### Correlation Maps
 <div align="center">
   <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="320"/>
   <img src="images/corr-qmetric-vs-qmetric-f1000.png" alt="Alt text" height="320"/>
@@ -82,7 +89,12 @@ These metrics are defined and obtained using quantifiable methods. To compute th
   <em>Left: Kendall’s τ correlation between human-evaluated quality dimensions Y-axis and quantifiable metrics X-axis. Right: Correlation between quantifiable metrics on F1000.</em>
 </p>
 
----
+
+## Human Annotated Data Analysis
+
+
+## Machine Learning Model Training and Comparison
+
 
 <div align="center">
   <img src="images/kendall-tau-llms.png" alt="Alt text" height="320" style="transform: rotate(-90deg);"/>

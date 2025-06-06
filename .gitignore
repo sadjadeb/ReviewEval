@@ -1,3 +1,5 @@
-data
+data/processed/
+data/raw/
+data/human-annotation-data
 .venv/
 human_annotation/assessments_output/

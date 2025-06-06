@@ -21,6 +21,7 @@ gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMP
 ```
 RottenReviews
 ├─ data
+│  ├─ dataset-overview.txt
 │  ├─ human-annotation-data/ (all the human annotated data would appear here)
 │  ├─ processed/ (all the processed and cleaned data would appear here)
 │  └─ raw/ (all the raw data crawled from different venues would appear here)
@@ -90,28 +91,6 @@ These metrics are defined and obtained using quantifiable methods. To compute th
 <p align="center">
   <em>Left: Kendall’s τ correlation between human-evaluated and LLMs-evaluated quality dimensions. Right: Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em>
 </p>
-
-### Dataset Files Overview
-| Folder Name   | File Name               | File Size | Record Type | Number of Records | Format  |
-|---------------|-------------------------|-----------|-------------|-------------------|---------|
-| raw           | f1000research          | 497 MB    | Submission  | 4,509  | JSON    |
-| raw           | semantic-web-journal   | 12.7 MB   | Submission  | 796    | JSON    |
-| raw           | iclr-2024              | 148 MB    | Submission  | 7,262  | PKL     |
-| raw           | neurips-2023           | 81.6 MB   | Submission  | 3,395  | PKL     |
-| processed     | f1000research          | 41.2 MB   | Review      | 9,482      | CSV     |
-| processed     | semantic-web-journal   | 14.6 MB   | Review      | 2,337      | CSV     |
-| processed     | iclr-2024              | 147 MB    | Review      | 28,028     | JSON    |
-| processed     | neurips-2023           | 80.6 MB   | Review      | 15,175     | JSON    |
-| processed     | merged-200-papers      | 3.3 MB    | Submission  | 200    | JSON    |
-| processed     | HA_ALL_qmetrics        | 3.3 MB    | Review      | 661        | JSON    |
-| processed     | HA_ALL_qwen            | 3.5 MB    | Review      | 661        | JSON    |
-| processed     | HA_ALL_llama           | 3.3 MB    | Review      | 661        | JSON    |
-| processed     | HA_ALL_phi4            | 46 KB     | Review      | 661        | CSV     |
-| processed     | HA_ALL_gpt             | 45 KB     | Review      | 661        | CSV     |
-| processed     | f1000_reviewers_info   | 2.87 GB   | Reviewer    | 8831       | PKL     |
-| processed     | sw_reviewers_info      | 93.4 MB   | Reviewer    | 701        | PKL     |
-| processed     | f1000_reviewers_similarity_info   | 1.2 MB   | Reviewer    | 8831       | PKL     |
-| processed     | sw_reviewers_similarity_info      | 72 KB    | Reviewer    | 701       | PKL     |
 
 
 # Abstract

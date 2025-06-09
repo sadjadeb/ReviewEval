@@ -376,8 +376,8 @@ We implemented the interface to gather human annotation data using Flask and bui
 ## Interface UI
 Here's an example of our user interface for gathering data from participants:
 <div align="center">
-  <img src="images/UI-1.png" alt="User Interface Example" height="300"/>
-  <img src="images/UI-2.png" alt="User Interface Example" height="300"/>
+  <img src="images/UI-1.png" alt="User Interface Example" height="280"/>
+  <img src="images/UI-2.png" alt="User Interface Example" height="280"/>
 </div>
 
 

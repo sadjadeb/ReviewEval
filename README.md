@@ -1,38 +1,3 @@
-<!-- 
-Title ##########
-  Description of readme ##########
-  ToC ##########
-  Project tree ##########
-Dataset ##########
-  How to download the data ##########
-  Dataset Files (optional) ##########
-  Sample of the raw data ##########
-Calculate the metrics
-  Run notebooks ##########
-  Quantifiable metrics ##########
-    Sample of the output ##########
-    Quantifiable metrics table ##########
-    Quantifiable metrics corr fig ##########
-  LLM metrics ##########
-    Models ##########
-    Prompt ##########
-    Sample of the output ##########
-Human Annotation
-  How did we implement the interface of our annotation tool (flask, address of web app files)
-  Screenshot of how the interface looks like
-  Sample of the file we are saving (each person's record)
-  2 figs that compare human-evaluated vs qmetrics and llms (the blue one and left corr map)
-Predicting overall quality of a review
-  Task definition
-  Explain the traditional models (mlp 2 layer 100 N, rf …, svm …)
-  Explain what is the source of the LLM-based overall quality (point to the “Cacl metrics by LLM” setion)
-  Explain how did we finetune the LLAMA (You can ask Sonny)
-  Fig (colored fig with ML models)
-Abstract
-  the whole abstract
-Citation
-  TBA
--->
 # RottenReviews: Benchmarking Review Quality with Human and LLM-Based Judgments
 This repository contains the code and data for the paper "**RottenReviews** : Benchmarking Review Quality with Human and LLM-Based Judgments". It should be noted that due to the size of the dataset, we are unable to provide the full dataset in this repository. Hence, the repository contains the codes for the sake of reproducibility and the data are available on Google Drive.
 
@@ -129,7 +94,6 @@ gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMP
 | processed     | iclr-2024              | 147 MB    | Review      | 28,028     | JSON    |
 | processed     | neurips-2023           | 80.6 MB   | Review      | 15,175     | JSON    |
 | processed     | merged-200-papers      | 3.3 MB    | Submission  | 200    | JSON    |
-
 
 ## Sample of the Raw Data
 Here's a sample of raw data from Semantic Web Journal.
@@ -262,7 +226,7 @@ As mentioned in [Run notebooks](#run-notebooks), by running the notebooks, you c
 - **Qwen-3**: A state-of-the-art model optimized for natural language understanding and generation tasks.
 - **Phi-4**: Known for its advanced reasoning capabilities and contextual comprehension.
 - **GPT-4o**: OpenAI's latest iteration of the GPT series, designed for high-quality text generation.
-- **LLaMA-3-Finetuned**: A fine-tuned version of LLaMA-3 tailored for specific review quality evaluation tasks. The code for finetuning LLaMA-3 can be found in the `predict_review_quality_score/llama3-fintune/` directory.
+
 
 ### Prompt
 We prompted all the models mentioned above with the same prompt to evaluate review quality. Below is the exact prompt used:
@@ -373,7 +337,7 @@ In this study, we conducted a human evaluation of reviews from four academic ven
 We implemented the interface to gather human annotation data using Flask and built a web application for this purpose. The source code for the web application is available in the `human_annotation/interface` directory, which contains all necessary files to deploy and run the annotation tool.
 
 ## Interface UI
-Here's an example of our user interface for gathering data from participants:
+Here's a screenshot of the user interface of the human data gathering web app:
 <div align="center">
   <img src="images/UI-1.png" alt="User Interface Example" height="250"/>
   <img src="images/UI-2.png" alt="User Interface Example" height="250"/>
@@ -417,7 +381,6 @@ The recorded data from participants are stored in the `data/human-annotation-dat
   <em>Left: Kendall’s τ correlation between human-evaluated and LLMs-evaluated quality dimensions. Right: Kendall’s τ correlation between human-evaluated quality dimensions Y-axis and quantifiable metrics X-axis.</em>
 </p>
 
-
 # Predicting Overall Quality of a Review
 We aimed to predict the overall quality of a review using quantifiable metrics extracted in the previous steps, with labels for overall quality derived from human annotation data. All relevant codes for this section are available in the `predict_review_quality_score` directory.
 
@@ -460,7 +423,6 @@ python llm_eval.py --train_data_path /path/to/train_data.csv \
            --logging_dir /path/to/logging_dir
 ```
 
-
 ## ML Models vs LLMs Figure
 <div align="center">
   <img src="images/model-comparison.png" alt="Alt text" height="400"/>
@@ -468,7 +430,6 @@ python llm_eval.py --train_data_path /path/to/train_data.csv \
 <p align="center">
   <em>Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em>
 </p>
-
 
 # Abstract
 The quality of peer review plays a critical role in scientific publishing, yet remains poorly understood and challenging to evaluate at scale. In this work, we introduce *RottenReviews*, a benchmark designed to facilitate systematic assessment of review quality. *RottenReviews* comprises over 15,000 submissions from four distinct academic venues enriched with over 9,000 reviewer scholarly profiles and paper metadata. We define and compute a diverse set of quantifiable review-dependent and reviewer-dependent metrics, and compare them against structured assessments from large language models (LLMs) and expert human annotations. Our human-annotated subset includes over 700 paper–review pairs labeled across 13 explainable and conceptual dimensions of review quality. Our empirical findings reveal that LLMs, both zero-shot and fine-tuned, exhibit limited alignment with human expert evaluations of peer review quality. Surprisingly, simple interpretable models trained on quantifiable features outperform fine-tuned LLMs in predicting overall review quality.

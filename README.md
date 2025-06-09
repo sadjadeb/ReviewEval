@@ -62,11 +62,10 @@ By following the instructions below, you can download the dataset and run files 
   - [Record Sample](#record-sample)
   - [Comparison Figures](#comparison-figures)
 - [Predicting Overall Quality of a Review](#predicting-overall-quality-of-a-review)
-  - [Task Definition](#task-definition)
   - [Traditional Models](#traditional-models)
-  - [Source of LLM-Based Overall Quality](#source-of-llm-based-overall-quality)
-  - [Finetuning LLAMA](#finetuning-llama)
-  - [ML Models Figure](#ml-models-figure)
+  - [LLM-Based Overall Quality](#llm-based-overall-quality)
+  - [Fine-tuning LLaMA](#fine-tuning-llama)
+  - [ML Models vs LLMs Figure](#ml-models-vs-llms-figure)
 - [Abstract](#abstract)
 - [Citation](#citation)
 
@@ -419,13 +418,57 @@ The recorded data from participants are stored in the `data/human-annotation-dat
 </p>
 
 
+# Predicting Overall Quality of a Review
+We aimed to predict the overall quality of a review using quantifiable metrics extracted in the previous steps, with labels for overall quality derived from human annotation data. All relevant codes for this section are available in the `predict_review_quality_score` directory.
+
+## Traditional Models
+Below is a list of traditional models used for predicting overall review quality, along with a brief explanation of their setup using `sklearn` library:
+
+1. **Random Forest**:  
+  A robust ensemble learning method that combines multiple decision trees to improve prediction accuracy.  
+    - **Key Parameters**:  
+      - `random_state=42`: Ensures reproducibility.  
+      - `n_estimators=100`: Specifies the number of trees in the forest.
+
+2. **Linear Regression**:  
+  A simple and interpretable model that fits a linear relationship between input features and the target variable.  
+    - **Key Parameters**:  
+      - Default settings used for simplicity.
+
+3. **Neural Network**:  
+  A multi-layer perceptron (MLP) designed to capture complex non-linear relationships in the data.  
+    - **Key Parameters**:  
+      - `random_state=42`: Ensures reproducibility.  
+      - `hidden_layer_sizes=(54, 108, 108, 54)`: Specifies the architecture with four layers and varying neuron counts.
+
+## LLM-Based Overall Quality
+Each LLM quantifies the overall quality of a review on a 0–100 scale, as defined in the [Prompt](#prompt) section. This score reflects the review's overall usefulness and professionalism across dimensions like comprehensiveness, clarity, and fairness. Using three base models and one fine-tuned model (as detailed in [Models](#models)), we compared LLM-generated scores with human annotations to evaluate alignment and reliability in assessing review quality.
+
+## Fine-tuning LLAMA
+All the necessary code to fine-tune LLaMA is available in the `predict_review_quality_score/llama3-finetune` directory. You can fine-tune the model using the following command:
+
+```bash
+cd /home/ali/RottenReviews/predict_review_quality_score/llama3-finetune/
+
+python llm_eval.py --train_data_path /path/to/train_data.csv \
+           --val_data_path /path/to/val_data.csv \
+           --model_name_or_path llama-base \
+           --output_dir /path/to/output_dir \
+           --batch_size 16 \
+           --learning_rate 5e-5 \
+           --num_train_epochs 3 \
+           --logging_dir /path/to/logging_dir
+```
 
 
+## ML Models vs LLMs Figure
+<div align="center">
+  <img src="images/model-comparison.png" alt="Alt text" height="400"/>
+</div>
+<p align="center">
+  <em>Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em>
+</p>
 
-<!--
-<img src="images/model-comparison.png" alt="Alt text" height="320"/>
-Caption: Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.
--->
 
 # Abstract
 The quality of peer review plays a critical role in scientific publishing, yet remains poorly understood and challenging to evaluate at scale. In this work, we introduce *RottenReviews*, a benchmark designed to facilitate systematic assessment of review quality. *RottenReviews* comprises over 15,000 submissions from four distinct academic venues enriched with over 9,000 reviewer scholarly profiles and paper metadata. We define and compute a diverse set of quantifiable review-dependent and reviewer-dependent metrics, and compare them against structured assessments from large language models (LLMs) and expert human annotations. Our human-annotated subset includes over 700 paper–review pairs labeled across 13 explainable and conceptual dimensions of review quality. Our empirical findings reveal that LLMs, both zero-shot and fine-tuned, exhibit limited alignment with human expert evaluations of peer review quality. Surprisingly, simple interpretable models trained on quantifiable features outperform fine-tuned LLMs in predicting overall review quality.

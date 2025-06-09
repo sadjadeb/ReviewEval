@@ -71,7 +71,6 @@ By following the instructions below, you can download the dataset and run files 
 - [Citation](#citation)
 
 ## Project Tree
-
 ```
 RottenReviews
 ├─ data
@@ -135,60 +134,44 @@ gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMP
 
 ## Sample of the Raw Data
 Here's a sample of raw data from Semantic Web Journal.
-```
+```json
 {
-    "id": "3654-4868",
-    "date": "02/29/2024",
-    "type": "Full Paper",
-    "abstract": "Relation prediction in Knowledge Graphs (KGs) aims to anticipate...",
-    "pdf_link": "https://www.semantic-web-journal.net/...",
-    "authors": [
-      "Jiangtao Ma",
-      "Yuke Ma",
-      "Fan Zhang1",
-      "Yanjun Wang",
-      "Xiangyang Luo",
-      "Chenliang Li",
-      "Yaqiong Qiao"
-    ],
-    "editor": "Guest Editors KG Gen from Text 2023",
-    "status": [
-      "Reviewed"
-    ],
-    "decision": "Major Revision",
-    "reviews": [
-      {
-        "reviewer": "Anonymous",
-        "date": "27/Aug/2024",
-        "suggestion": "Minor Revision",
-        "comment": "The paper proposed a new approach/method for KG relation prediction based..."
-      },
-      {
-        "reviewer": "Janneth Chicaiza",
-        "date": "03/Sep/2024",
-        "suggestion": "Minor Revision",
-        "comment": "The subject on which the proposal is focused is interesting, bellow..."
-      },
-      {
-        "reviewer": "Anonymous",
-        "date": "10/Sep/2024",
-        "suggestion": "Minor Revision",
-        "comment": "The paper introduces a novel approach to knowledge graph relation..."
-      }
-    ],
-    "version_prev": null,
-    "version_next": null,
-    "title": "HiHo: A Hierarchical and Homogenous Subgraph Learning Model...",
-    "rev_link": "https://www.semantic-web-journal.net/..."
-  }
+  "id": "3654-4868",
+  "date": "02/29/2024",
+  "type": "Full Paper",
+  "abstract": "Relation prediction in Knowledge...",
+  "pdf_link": "https://www.semantic-web-journal...",
+  "authors": [
+    "Jiangtao Ma",
+    "Yuke Ma",
+    "Fan Zhang1",
+    ...
+  ],
+  "editor": "Guest Editors KG Gen from Text 2023",
+  "status": [
+    "Reviewed"
+  ],
+  "decision": "Major Revision",
+  "reviews": [
+    {
+      "reviewer": "Anonymous",
+      "date": "27/Aug/2024",
+      "suggestion": "Minor Revision",
+      "comment": "The paper proposed a new approach..."
+    },
+    {
+      "reviewer": "Anonymous",
+      "date": "03/Sep/2024",
+      "suggestion": "Major Revision",
+      "comment": "The subject on which the proposal..."
+    }
+  ],
+  "version_prev": null,
+  "version_next": null,
+  "title": "HiHo: A Hierarchical and Homogenous Subgraph...",
+  "rev_link": "https://www.semantic-web-journal..."
+}
 ```
-
-
-
-
-
-
-
 
 # Reproduce the result
 

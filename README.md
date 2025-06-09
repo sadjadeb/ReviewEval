@@ -342,7 +342,6 @@ Return **exactly one** JSON block wrapped in the tag below — **no comments or 
     "Relevance Alignment":    ...,
     "Overall Quality":     ...
   }},
-  "overall_score_100": ...
 }}
 </review_assessment>
 ```

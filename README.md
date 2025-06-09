@@ -58,8 +58,8 @@ By following the instructions below, you can download the dataset and run files 
     - [Sample of the output](#sample-of-the-output)
 - [Human Annotation](#human-annotation)
   - [Interface Implementation](#interface-implementation)
-  - [Screenshot of the Interface](#screenshot-of-the-interface)
-  - [Sample Saved File](#sample-saved-file)
+  - [Interface UI](#interface-ui)
+  - [Record Sample](#record-sample)
   - [Comparison Figures](#comparison-figures)
 - [Predicting Overall Quality of a Review](#predicting-overall-quality-of-a-review)
   - [Task Definition](#task-definition)
@@ -367,20 +367,65 @@ Return **exactly one** JSON block wrapped in the tag below — **no comments or 
 }
 ```
 
-<!-- <div align="center">
-  <img src="images/kendall-tau-llms.png" alt="Alt text" height="320" style="transform: rotate(-90deg);"/>
-  <img src="images/model-comparison.png" alt="Alt text" height="320"/>
-  <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="320"/>
-  Left: Kendall’s τ correlation between human-evaluated quality dimensions Y-axis and quantifiable metrics X-axis. Right: 
+# Human Annotation
+In this study, we conducted a human evaluation of reviews from four academic venues. We randomly selected 50 papers from each venue, resulting in a dataset of 200 papers along with their associated reviews. This dataset comprises 661 reviews and 200 papers, providing a comprehensive basis for analyzing review quality. The processed dataset is available in `data/processed/merged-200-papers.json`.
+
+## Interface Implementation
+We implemented the interface to gather human annotation data using Flask and built a web application for this purpose. The source code for the web application is available in the `human_annotation/interface` directory, which contains all necessary files to deploy and run the annotation tool.
+
+## Interface UI
+Here's an example of our user interface for gathering data from participants:
+<div align="center">
+  <img src="images/UI-1.png" alt="User Interface Example" height="300"/>
+  <img src="images/UI-2.png" alt="User Interface Example" height="300"/>
+</div>
+
+
+## Record Sample
+The recorded data from participants are stored in the `data/human-annotation-data` folder. Each file in this directory represents a single record, containing annotations provided by individual participants. These records include detailed evaluations of review quality across multiple dimensions, such as comprehensiveness, clarity, and fairness. Below is a sample of one record:
+
+```json
+{
+    "paper_id": "170",
+    "submitted_at": "2025-05-15T18:57:57.054760",
+    "metrics": {
+        "review_Sangeeta-Saha_Comprehensiveness": 3,
+        "review_Sangeeta-Saha_Usage_of_Technical_Terms": 3,
+        "review_Sangeeta-Saha_Factuality": "partially factual",
+        "review_Sangeeta-Saha_Sentiment_Polarity": "negative",
+        "review_Sangeeta-Saha_Politeness": "neutral",
+        "review_Sangeeta-Saha_Vagueness": "moderate",
+        "review_Sangeeta-Saha_Objectivity": 4,
+        "review_Sangeeta-Saha_Fairness": 4,
+        "review_Sangeeta-Saha_Actionability": 2,
+        "review_Sangeeta-Saha_Constructiveness": 3,
+        "review_Sangeeta-Saha_Relevance_Alignment": 4,
+        "review_Sangeeta-Saha_Clarity_and_Readability": 1,
+        "review_Sangeeta-Saha_Overall_Quality": 60,
+        "review_J-H-Arias-Castro_Comprehensiveness": 3,
+        "review_J-H-Arias-Castro_Usage_of_Technical_Terms": 3,
+        "...": "..."
+    }
+}
+```
+
+## Comparison Figures
+<div align="center">
+  <img src="images/kendall-tau-llms.png" alt="Kendall’s τ correlation between human-evaluated and LLMs-evaluated quality dimensions" height="320" style="transform: rotate(-90deg);"/>
+  <img src="images/corr-human-vs-qmetric.png" alt="Kendall’s τ correlation between human-evaluated quality dimensions Y-axis and quantifiable metrics X-axis" height="320"/>
 </div>
 <p align="center">
-  <em>Left: Kendall’s τ correlation between human-evaluated and LLMs-evaluated quality dimensions. Right: Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.</em>
-</p> -->
+  <em>Left: Kendall’s τ correlation between human-evaluated and LLMs-evaluated quality dimensions. Right: Kendall’s τ correlation between human-evaluated quality dimensions Y-axis and quantifiable metrics X-axis.</em>
+</p>
 
 
 
 
 
+<!--
+<img src="images/model-comparison.png" alt="Alt text" height="320"/>
+Caption: Kendall’s τ correlation between human-evaluated and models-predicted Overall Quality of peer reviews.
+-->
 
 # Abstract
 The quality of peer review plays a critical role in scientific publishing, yet remains poorly understood and challenging to evaluate at scale. In this work, we introduce *RottenReviews*, a benchmark designed to facilitate systematic assessment of review quality. *RottenReviews* comprises over 15,000 submissions from four distinct academic venues enriched with over 9,000 reviewer scholarly profiles and paper metadata. We define and compute a diverse set of quantifiable review-dependent and reviewer-dependent metrics, and compare them against structured assessments from large language models (LLMs) and expert human annotations. Our human-annotated subset includes over 700 paper–review pairs labeled across 13 explainable and conceptual dimensions of review quality. Our empirical findings reveal that LLMs, both zero-shot and fine-tuned, exhibit limited alignment with human expert evaluations of peer review quality. Surprisingly, simple interpretable models trained on quantifiable features outperform fine-tuned LLMs in predicting overall review quality.

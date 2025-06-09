@@ -1,21 +1,77 @@
+<!-- 
+Title ##########
+  Description of readme ##########
+  ToC ##########
+  Project tree ##########
+Dataset ##########
+  How to download the data ##########
+  Dataset Files (optional) ##########
+  Sample of the raw data ##########
+Calculate the metrics
+    How to run the code to calc Quantifiable metrics
+      Path to the notebooks
+      Sample of the output
+      Qmetrics table
+      Qmetrics corr fig
+    Cacl metrics by LLM
+      What models did we prompt (List)
+      Prompt
+      Sample of the output
+Human Annotation
+  How did we implement the interface of our annotation tool (flask, address of web app files)
+  Screenshot of how the interface looks like
+  Sample of the file we are saving (each person's record)
+  2 figs that compare human-evaluated vs qmetrics and llms (the blue one and left corr map)
+Predicting overall quality of a review
+  Task definition
+  Explain the traditional models (mlp 2 layer 100 N, rf …, svm …)
+  Explain what is the source of the LLM-based overall quality (point to the “Cacl metrics by LLM” setion)
+  Explain how did we finetune the LLAMA (You can ask Sonny)
+  Fig (colored fig with ML models)
+Abstract
+  the whole abstract
+Citation
+  TBA
+-->
 # RottenReviews: Benchmarking Review Quality with Human and LLM-Based Judgments
 This repository contains the code and data for the paper "**RottenReviews** : Benchmarking Review Quality with Human and LLM-Based Judgments". It should be noted that due to the size of the dataset, we are unable to provide the full dataset in this repository. Hence, the repository contains the codes for the sake of reproducibility and the data are available on Google Drive.
 
 By following the instructions below, you can download the dataset and run files to either reproduce the results or use the dataset for your research.
 
-# Dataset
-### Download the Dataset
-Note: You need to install the gdown package to download the dataset.
-```bash
-pip install gdown
-```
+## Table of Contents
+- [Title](#title)
+  - [Table of Contents](#table-of-content)
+  - [Project Tree](#project-tree)
+- [Dataset](#dataset)
+  - [How to Download the Data](#how-to-download-the-data)
+  - [Dataset Files Overview](#dataset-files-overview)
+  - [Sample of the Raw Data](#sample-of-the-raw-data)
+- [Calculate the Metrics](#calculate-the-metrics)
+  - [How to Run the Code to Calculate Quantifiable Metrics](#how-to-run-the-code-to-calculate-quantifiable-metrics)
+    - [Path to the Notebooks](#path-to-the-notebooks)
+    - [Sample of the Output](#sample-of-the-output)
+    - [Qmetrics Table](#qmetrics-table)
+    - [Qmetrics Correlation Figure](#qmetrics-correlation-figure)
+  - [Calculate Metrics by LLM](#calculate-metrics-by-llm)
+    - [What Models Did We Prompt](#what-models-did-we-prompt)
+    - [Prompt](#prompt)
+    - [Sample of the Output](#sample-of-the-output-llm)
+- [Human Annotation](#human-annotation)
+  - [Interface Implementation](#interface-implementation)
+  - [Screenshot of the Interface](#screenshot-of-the-interface)
+  - [Sample Saved File](#sample-saved-file)
+  - [Comparison Figures](#comparison-figures)
+- [Predicting Overall Quality of a Review](#predicting-overall-quality-of-a-review)
+  - [Task Definition](#task-definition)
+  - [Traditional Models](#traditional-models)
+  - [Source of LLM-Based Overall Quality](#source-of-llm-based-overall-quality)
+  - [Finetuning LLAMA](#finetuning-llama)
+  - [ML Models Figure](#ml-models-figure)
+- [Abstract](#abstract)
+- [Citation](#citation)
 
-If you already have the gdown package installed, you can use the following commands to download the dataset:
-```bash
-cd RottenReviews/
-gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMPnwqJrYV?usp=sharing
-```
-### Project Tree
+## Project Tree
+
 ```
 RottenReviews
 ├─ data
@@ -47,6 +103,92 @@ RottenReviews
 ├─ README.md
 └─ .gitignore
 ```
+
+# Dataset
+In this section, we provide detailed instructions on how to download the dataset, an overview of the dataset file organization, and a sample of the raw data.
+
+## How to Download the Data
+Note: You need to install the gdown package to download the dataset.
+```bash
+pip install gdown
+```
+
+If you already have the gdown package installed, you can use the following commands to download the dataset:
+```bash
+cd RottenReviews/
+gdown --folder https://drive.google.com/drive/folders/1Uqfyl5uBKBdZem9kQHkhNSPMPnwqJrYV?usp=sharing
+```
+
+## Dataset Files Overview
+| Folder Name   | File Name               | File Size | Record Type | Number of Records | Format  |
+|---------------|-------------------------|-----------|-------------|-------------------|---------|
+| raw           | f1000research          | 497 MB    | Submission  | 4,509  | JSON    |
+| raw           | semantic-web-journal   | 12.7 MB   | Submission  | 796    | JSON    |
+| raw           | iclr-2024              | 148 MB    | Submission  | 7,262  | PKL     |
+| raw           | neurips-2023           | 81.6 MB   | Submission  | 3,395  | PKL     |
+| processed     | f1000research          | 41.2 MB   | Review      | 9,482      | CSV     |
+| processed     | semantic-web-journal   | 14.6 MB   | Review      | 2,337      | CSV     |
+| processed     | iclr-2024              | 147 MB    | Review      | 28,028     | JSON    |
+| processed     | neurips-2023           | 80.6 MB   | Review      | 15,175     | JSON    |
+| processed     | merged-200-papers      | 3.3 MB    | Submission  | 200    | JSON    |
+
+
+## Sample of the Raw Data
+Here's a sample of raw data from Semantic Web Journal.
+```
+{
+    "id": "3654-4868",
+    "date": "02/29/2024",
+    "type": "Full Paper",
+    "abstract": "Relation prediction in Knowledge Graphs (KGs) aims to anticipate...",
+    "pdf_link": "https://www.semantic-web-journal.net/...",
+    "authors": [
+      "Jiangtao Ma",
+      "Yuke Ma",
+      "Fan Zhang1",
+      "Yanjun Wang",
+      "Xiangyang Luo",
+      "Chenliang Li",
+      "Yaqiong Qiao"
+    ],
+    "editor": "Guest Editors KG Gen from Text 2023",
+    "status": [
+      "Reviewed"
+    ],
+    "decision": "Major Revision",
+    "reviews": [
+      {
+        "reviewer": "Anonymous",
+        "date": "27/Aug/2024",
+        "suggestion": "Minor Revision",
+        "comment": "The paper proposed a new approach/method for KG relation prediction based..."
+      },
+      {
+        "reviewer": "Janneth Chicaiza",
+        "date": "03/Sep/2024",
+        "suggestion": "Minor Revision",
+        "comment": "The subject on which the proposal is focused is interesting, bellow..."
+      },
+      {
+        "reviewer": "Anonymous",
+        "date": "10/Sep/2024",
+        "suggestion": "Minor Revision",
+        "comment": "The paper introduces a novel approach to knowledge graph relation..."
+      }
+    ],
+    "version_prev": null,
+    "version_next": null,
+    "title": "HiHo: A Hierarchical and Homogenous Subgraph Learning Model...",
+    "rev_link": "https://www.semantic-web-journal.net/..."
+  }
+```
+
+
+
+
+
+
+
 
 # Reproduce the result
 
@@ -85,6 +227,11 @@ You can find some of these results and viusalizations in the following table and
 </div>
 
 <div align="center">
+
+
+
+
+
 
 ### Correlation Maps
   <img src="images/corr-human-vs-qmetric.png" alt="Alt text" height="320"/>

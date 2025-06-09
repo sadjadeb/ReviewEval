@@ -48,7 +48,7 @@ By following the instructions below, you can download the dataset and run files 
   - [Sample of the Raw Data](#sample-of-the-raw-data)
 - [Calculate the Metrics](#calculate-the-metrics)
   - [Run notebooks](#run-notebooks)
-  - [Quantifiable metrics](#how-to-run-the-code-to-calculate-quantifiable-metrics)
+  - [Quantifiable metrics](#quantifiable-metrics)
     - [Sample of the output](#sample-of-the-output)
     - [Quantifiable metrics table](#qmetrics-table)
     - [Quantifiable metrics correlation figure](#qmetrics-correlation-figure)

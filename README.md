@@ -145,7 +145,7 @@ Here's a sample of raw data from Semantic Web Journal.
     "Jiangtao Ma",
     "Yuke Ma",
     "Fan Zhang1",
-    ...
+    "..."
   ],
   "editor": "Guest Editors KG Gen from Text 2023",
   "status": [

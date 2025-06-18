@@ -122,6 +122,7 @@ def append_works_to_reviewers(reviewers_info : dict):
         author_id = author["_id"]
         known_works_ids = [work['id'] for work in author["known_works"]]
         recent_works_ids = [work['id'] for work in author["known_works"] if work['year'] >= 2023]
+        first_publication_year = min([work['year'] for work in author["known_works"]])
         
         # Fetch all works by ID in a single query
         works = works_col.find({"_id": {"$in": known_works_ids}}, {"title": 1, "abstract": 1})
@@ -133,6 +134,7 @@ def append_works_to_reviewers(reviewers_info : dict):
 
         reviewers_info[ids_to_names[author_id]]["works"] = works_list
         reviewers_info[ids_to_names[author_id]]["recent_works"] = recent_works_list
+        reviewers_info[ids_to_names[author_id]]["first_publication_year"] = first_publication_year
 
     return reviewers_info
 
@@ -207,9 +209,11 @@ if __name__ == "__main__":
 
     if args.dataset == 'sw':
         dataset_path = 'data/raw/semantic-web-journal.json'
+        reviewers_info_path = 'data/processed/sw_reviewers_info.pkl'
         output_path = 'data/processed/sw_reviewers_similarity_info.pkl'
     elif args.dataset == 'f1000':
         dataset_path = 'data/raw/f1000research.json'
+        reviewers_info_path = 'data/processed/f1000_reviewers_info.pkl'
         output_path = 'data/processed/f1000_reviewers_similarity_info.pkl'
         
     # Load the Semantic Web data from JSON file
@@ -220,12 +224,8 @@ if __name__ == "__main__":
     reviewers_info_with_works = append_works_to_reviewers(reviewers_info)
     
     # Save the reviewers info with works to a pickle file
-    with open('data/processed/sw_reviewers_info_ww.pkl', 'wb') as f:
+    with open(reviewers_info_path, 'wb') as f:
         pickle.dump(reviewers_info_with_works, f)
-        
-    # Load the reviewers info with works from the pickle file
-    # with open('data/processed/sw_reviewers_info_ww.pkl', 'rb') as f:
-    #     reviewers_info_with_works = pickle.load(f)
     
     similarity_info = get_similarity_metrics_for_reviewers(dataset, args.dataset, reviewers_info_with_works, specter_model)
     

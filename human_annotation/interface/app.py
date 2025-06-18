@@ -8,7 +8,7 @@ from collections import defaultdict
 
 app = Flask(__name__)
 
-INPUT_FILE = '../data/merged_200_papers.json'
+INPUT_FILE = '../../data/processed/merged_200_papers.json'
 OUTPUT_DIR = '../assessments_output/'
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)

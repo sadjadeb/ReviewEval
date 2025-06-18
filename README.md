@@ -30,7 +30,6 @@ By following the instructions below, you can download the dataset and run files 
   - [Traditional Models](#traditional-models)
   - [LLM-Based Overall Quality](#llm-based-overall-quality)
   - [Fine-tuning LLaMA](#fine-tuning-llama)
-  - [ML Models vs LLMs Figure](#ml-models-vs-llms-figure)
 - [Abstract](#abstract)
 - [Citation](#citation)
 
@@ -339,8 +338,11 @@ We implemented the interface to gather human annotation data using Flask and bui
 ## Interface UI
 Here's a screenshot of the user interface of the human data gathering web app:
 <div align="center">
-  <img src="images/UI-1.png" alt="User Interface Example" height="250"/>
-  <img src="images/UI-2.png" alt="User Interface Example" height="250"/>
+  <img src="images/UI-1.png" alt="User Interface Example" height="400"/>
+</div>
+
+<div align="center">
+  <img src="images/UI-2.png" alt="User Interface Example" height="400"/>
 </div>
 
 
@@ -423,7 +425,6 @@ python llm_eval.py --train_data_path /path/to/train_data.csv \
            --logging_dir /path/to/logging_dir
 ```
 
-## ML Models vs LLMs Figure
 <div align="center">
   <img src="images/model-comparison.png" alt="Alt text" height="400"/>
 </div>
